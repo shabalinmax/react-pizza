@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  align-items: center;
+  input {
+
+   border: 1px solid;
+   font-size: 20px;
+   border-radius: 10px;
+   padding: 10px;
+   transition: all 1s ease-in-out;
+
+    //&:focus {
+    //  width: 400px;
+    //} хотелось бы реализовать, но очистка тогда рабоатет криво, надо бы разобраться
+ }
+  button {
+    margin-left: 20px;
+    color: #fe5f1e;
+    height: 50%;
+    width: 20px;
+  }
+}
