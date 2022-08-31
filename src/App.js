@@ -15,10 +15,8 @@ function App() {
     const [isDeleted, setIsDeleted] = React.useState(false)
     const [isAdded, setIsAdded] = React.useState(false)
     const deleteAllCart = () => {
-       arrayOfId.forEach(el => {
-           axios.delete('https://62e22afb3891dd9ba8e1453c.mockapi.io/cart/' + el)
+           setCartItems([])
            setIsDeleted(true)
-       })
     }
 
     const deleteCartItem = (itemId) => {
@@ -29,17 +27,14 @@ function App() {
         setIsLoading(true)
         setIsDeleted(false)
         setIsAdded(true)
-        axios.get('https://62e22afb3891dd9ba8e1453c.mockapi.io/cart')
-            .then(res => {
-                setCartItems(res.data)
-                setIsLoading(false)
-
-            })
         setIsAdded(false)
     }, [isDeleted, isAdded ] )
     const [cartItems, setCartItems] = React.useState([])
-    const onClickAdd = () => {
+    const onClickAdd = (obj) => {
       setIsAdded(true)
+        setCartItems([...cartItems,
+            obj])
+        console.log(obj)
     }
 
     let arrayOfId = []
@@ -47,14 +42,18 @@ function App() {
     let totalSumOfCart = cartItems.reduce((prev,item) => {return prev + item.price}, 0)
 
     return (
-
           <div className="wrapper">
                 <Header
-                    onClickAdd ={onClickAdd} cartItems={cartItems} totalSumOfCart={totalSumOfCart} searchValue={searchValue} setSearchValue={setSearchValue} />
+                    onClickAdd ={onClickAdd}
+                    cartItems={cartItems}
+                    totalSumOfCart={totalSumOfCart}
+                    searchValue={searchValue}
+                    setSearchValue={setSearchValue} />
                 <div className="content ">
                     <div className="container">
                         <Routes>
-                            <Route path="/" element={<Home onClickAdd = {onClickAdd} searchValue={searchValue}  />}>
+                            <Route path="/" element=
+                                {<Home onClickAdd = {onClickAdd} searchValue={searchValue}  />}>
                             </Route>
                             <Route path="/cart.html" element={
                                 <Cart

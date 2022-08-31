@@ -1,18 +1,12 @@
 import React from "react";
-import axios from "axios";
 
 function Index ({title, price, imageUrl, sizes, types, id, onClickAdd}){
-    const onAddToCart = () => {
-        axios.post("https://62e22afb3891dd9ba8e1453c.mockapi.io/cart", {
-            title, price, imageUrl, activeSize, activeType, id
-        })
-    }
-
     const [pizzaCount, setPizzaCount] = React.useState(0)
 
     const [activeType, setActiveType] = React.useState(0)
         // для работы выбора тонкой или толстой пиццы
     const [activeSize, setActiveSize] = React.useState(40)
+
     return (
     <div className="pizza-block">
     <img
@@ -25,19 +19,19 @@ function Index ({title, price, imageUrl, sizes, types, id, onClickAdd}){
         <ul>
             {types.map(
                 type =>
-                    <li  onClick={() => setActiveType(type)} className={activeType === type || types.length === 1 ? `active`: ``} >
+                    <li key={type} onClick={() => setActiveType(type)} className={activeType === type || types.length === 1 ? `active`: ``} >
                         {type === 0 ? 'тонкое': `традиционное`  } </li>) }
 
         </ul>
         <ul>
             {sizes.map(size =>
-                <li onClick={() => setActiveSize(size)} className={activeSize === size ? `active`: ``} >
+                <li key={size} onClick={() => setActiveSize(size)} className={activeSize === size ? `active`: ``} >
                     {size + ' см.'} </li>)}
         </ul>
     </div>
     <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} руб.</div>
-        <button onClick={() => {onClickAdd();onAddToCart()}} className="button button--outline button--add">
+        <button onClick={() => {onClickAdd({title, price, imageUrl, activeSize, activeType, id});}} className="button button--outline button--add">
             <svg
                 width="12"
                 height="12"

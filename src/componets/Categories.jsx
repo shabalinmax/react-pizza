@@ -4,8 +4,11 @@ let categoryArray = [`Все`,`Мясные`,`Гриль`,`Острые`,`Зак
 function Categories ({categoryId,setCategoryId}) {
     const onClickCategory = (i) => {
         setCategoryId(i)
-
     }
+    React.useEffect(() => {
+        console.log(categoryId)
+
+    },[categoryId])
     return (
         <div className="categories">
             <ul>
