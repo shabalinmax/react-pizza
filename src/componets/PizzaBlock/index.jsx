@@ -1,7 +1,6 @@
 import React from "react";
 
 function Index ({title, price, imageUrl, sizes, types, id, onClickAdd}){
-    const [pizzaCount, setPizzaCount] = React.useState(0)
 
     const [activeType, setActiveType] = React.useState(0)
         // для работы выбора тонкой или толстой пиццы
@@ -31,7 +30,7 @@ function Index ({title, price, imageUrl, sizes, types, id, onClickAdd}){
     </div>
     <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} руб.</div>
-        <button onClick={() => {onClickAdd({title, price, imageUrl, activeSize, activeType, id});}} className="button button--outline button--add">
+        <button onClick={() => {onClickAdd({title, price, imageUrl, activeSize, activeType, id: new Date().toISOString()});}} className="button button--outline button--add">
             <svg
                 width="12"
                 height="12"

@@ -1,8 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-function CartBlock({deleteAllCart,cartItems,deleteCartItem,totalSumOfCart}) {
+function CartBlock({deleteAllCart,cartItems,deleteCartItem,totalSumOfCart,isDeleted}) {
+    React.useEffect(() => {
 
+    },[isDeleted])
     return (
         <div className="cart">
             <div className="cart__top">
@@ -53,7 +55,15 @@ function CartBlock({deleteAllCart,cartItems,deleteCartItem,totalSumOfCart}) {
                             <div className="cart__item-price">
                                 <b>{item.price + ' руб.'}</b>
                             </div>
+                            {/*
+                            */}
+                            {/*
+                            */}
                             <div onClick={() => deleteCartItem(item.id) } className="cart__item-remove">
+                                {/*
+                                */}
+                                {/*
+                                */}
                                 <div className="button button--outline button--circle">
                                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">

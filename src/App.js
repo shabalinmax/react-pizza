@@ -7,20 +7,21 @@ import NotFound from './pages/NotFound'
 import {Routes} from "react-router-dom";
 import {Route} from "react-router-dom";
 import Cart from "./pages/Cart";
-import axios from "axios";
 
 function App() {
  const [searchValue, setSearchValue] = React.useState('')
     const [isLoading, setIsLoading] = React.useState(true) // сделать для скелетов в будущем
     const [isDeleted, setIsDeleted] = React.useState(false)
     const [isAdded, setIsAdded] = React.useState(false)
+    const [cartItems, setCartItems] = React.useState([])
+
     const deleteAllCart = () => {
            setCartItems([])
            setIsDeleted(true)
     }
 
-    const deleteCartItem = (itemId) => {
-        axios.delete("https://62e22afb3891dd9ba8e1453c.mockapi.io/cart/" + itemId)
+    const deleteCartItem = (id) => {
+        console.log( setCartItems(cartItems.filter(el => id !== el.id)))
         setIsDeleted(true)
     }
     React.useEffect(() => {
@@ -28,8 +29,7 @@ function App() {
         setIsDeleted(false)
         setIsAdded(true)
         setIsAdded(false)
-    }, [isDeleted, isAdded ] )
-    const [cartItems, setCartItems] = React.useState([])
+    }, [isDeleted, isAdded] )
     const onClickAdd = (obj) => {
       setIsAdded(true)
         setCartItems([...cartItems,
@@ -57,6 +57,7 @@ function App() {
                             </Route>
                             <Route path="/cart.html" element={
                                 <Cart
+                                    isDeleted = {isDeleted}
                                     deleteAllCart={deleteAllCart}
                                     cartItems={cartItems}
                                     deleteCartItem={deleteCartItem}

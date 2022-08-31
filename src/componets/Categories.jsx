@@ -17,7 +17,6 @@ function Categories ({categoryId,setCategoryId}) {
                         {categoryArray}
                     </li>)
                 }
-            {/*вот эта хуйня рендерит категории пицц. Инфа берется из categoryArray и дает возможность выбрать визуально категори**/}
             </ul>
     </div>)
 }

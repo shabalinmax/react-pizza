@@ -4,6 +4,7 @@ import Sort from '../componets/Sort'
 import Index from "../componets/PizzaBlock";
 import Skeleton from "../componets/PizzaBlock/Skeleton";
 import axios from "axios";
+import sort from "../componets/Sort";
 function  Home({onClickAdd, searchValue}) {
     const [categoryId, setCategoryId] = React.useState(0)
     const [selected, setSelected] = React.useState(0)
@@ -24,17 +25,18 @@ function  Home({onClickAdd, searchValue}) {
                 {"id":9,"imageUrl":"https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/30367198-f3bd-44ed-9314-6f717960da07.jpg","title":"Овощи и грибы 🌱","types":[0,1],"sizes":[26,30,40],"price":285,"category":[0,5],"rating":7}]
         )
 
+
         setIsLoading(false)
-        }, [categoryId, selected]
+        }, [categoryId]
     )
     const [items, setItems] = React.useState([]) // отображение пицц/скелетов
     const [isLoading, setIsLoading] = React.useState(true)
     const skeletons = [...new Array(8)].map((_, index) => <Skeleton key = {index} /> )
+
+
     const pizzas =
         items.filter(obj => obj.title.toLowerCase().includes(searchValue.toLowerCase())).filter(obj => obj.types.includes(0))
             .filter(el => el.category.includes(categoryId) === true)
-            .sort(function(a, b) {
-                return a - b})
             .map((obj) =>
             <Index
                 obj = {obj}
